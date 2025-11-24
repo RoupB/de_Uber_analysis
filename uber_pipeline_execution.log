@@ -1,0 +1,64 @@
+2025-11-24 19:48:41,522 - INFO - ============================================================
+2025-11-24 19:48:41,522 - INFO - UBER ANALYTICS PIPELINE EXECUTION STARTED
+2025-11-24 19:48:41,523 - INFO - Execution Time: 2025-11-24 19:48:41
+2025-11-24 19:48:41,524 - INFO - ============================================================
+2025-11-24 19:49:20,050 - INFO - ============================================================
+2025-11-24 19:49:20,051 - INFO - UBER ANALYTICS PIPELINE EXECUTION STARTED
+2025-11-24 19:49:20,052 - INFO - Execution Time: 2025-11-24 19:49:20
+2025-11-24 19:49:20,052 - INFO - ============================================================
+2025-11-24 19:49:41,692 - INFO - Creating target column: RideCompleted
+2025-11-24 19:49:41,804 - INFO - Target column created. Total records: 150000
+2025-11-24 19:50:40,492 - INFO - Creating dimension tables...
+2025-11-24 19:50:41,359 - INFO - dim_customer created: 149779 unique customers
+2025-11-24 19:50:41,665 - INFO - dim_driver created: 22 unique driver ratings
+2025-11-24 19:50:41,923 - INFO - dim_vehicle created: 7 vehicle types
+2025-11-24 19:50:42,553 - INFO - dim_location created: 30564 unique locations
+2025-11-24 19:51:03,650 - INFO - Starting feature engineering...
+2025-11-24 19:51:03,672 - INFO - Created 3 string indexers
+2025-11-24 19:51:03,673 - INFO - Feature columns selected: ['Avg VTAT', 'Avg CTAT', 'Ride Distance', 'VehicleType_Index', 'PickupLocation_Index', 'DropLocation_Index']
+2025-11-24 19:51:03,680 - INFO - VectorAssembler created
+2025-11-24 19:51:14,285 - INFO - Creating facts_rides table...
+2025-11-24 19:51:14,387 - INFO - facts_rides created with 13 columns and 150000 records
+2025-11-24 19:51:44,493 - INFO - Splitting data into train/test sets (70/30)...
+2025-11-24 19:51:45,023 - INFO - Test set: 44789 records
+2025-11-24 19:51:45,304 - INFO - Training set: 105211 records
+2025-11-24 19:52:13,185 - INFO - Splitting data into train/test sets (70/30)...
+2025-11-24 19:52:13,444 - INFO - Test set: 29850 records
+2025-11-24 19:52:13,696 - INFO - Training set: 120150 records
+2025-11-24 19:52:19,460 - INFO - Defining ML models...
+2025-11-24 19:52:19,483 - INFO - RandomForestClassifier: numTrees=50, maxDepth=10, maxBins=200
+2025-11-24 19:52:19,491 - INFO - GBTClassifier: maxIter=50, maxBins=200
+2025-11-24 19:52:19,492 - INFO - LogisticRegression: maxIter=50
+2025-11-24 19:52:29,906 - INFO - Creating ML pipelines...
+2025-11-24 19:52:29,907 - INFO - RandomForest pipeline created with 5 stages
+2025-11-24 19:53:24,284 - INFO - Creating ML pipelines...
+2025-11-24 19:53:24,285 - INFO - RandomForest pipeline created with 5 stages
+2025-11-24 19:53:24,286 - INFO - LogisticRegression pipeline created with 5 stages
+2025-11-24 19:53:24,286 - INFO - GBT pipeline created with 5 stages
+2025-11-24 19:57:20,089 - INFO - ============================================================
+2025-11-24 19:57:20,089 - INFO - STARTING MODEL TRAINING
+2025-11-24 19:57:20,090 - INFO - ============================================================
+2025-11-24 19:57:30,245 - INFO - RandomForest training completed in 10.15 seconds
+2025-11-24 19:57:35,597 - INFO - LogisticRegression training completed in 5.35 seconds
+2025-11-24 19:58:02,287 - INFO - GBTClassifier training completed in 26.69 seconds
+2025-11-24 19:58:02,288 - INFO - Total training time: 42.19 seconds
+2025-11-24 19:58:10,600 - INFO - ============================================================
+2025-11-24 19:58:10,600 - INFO - STARTING MODEL PREDICTIONS
+2025-11-24 19:58:10,601 - INFO - ============================================================
+2025-11-24 19:58:10,753 - INFO - GBTClassifier predictions completed
+2025-11-24 19:59:06,150 - INFO - ============================================================
+2025-11-24 19:59:06,151 - INFO - STARTING MODEL PREDICTIONS
+2025-11-24 19:59:06,151 - INFO - ============================================================
+2025-11-24 19:59:18,353 - INFO - Evaluating model performance...
+2025-11-24 19:59:18,896 - INFO - RandomForest RMSE: 0.2091
+2025-11-24 19:59:19,520 - INFO - GBTClassifier RMSE: 0.2109
+2025-11-24 19:59:19,521 - INFO - LogisticRegression RMSE: 0.2286
+2025-11-24 19:59:41,948 - INFO - ============================================================
+2025-11-24 19:59:41,948 - INFO - FINAL BENCHMARK RESULTS
+2025-11-24 19:59:41,949 - INFO - ============================================================
+2025-11-24 19:59:43,706 - INFO - RandomForest -> Accuracy: 0.9563, RMSE: 0.2091
+2025-11-24 19:59:43,707 - INFO - GBTClassifier -> Accuracy: 0.9555, RMSE: 0.2109
+2025-11-24 19:59:43,707 - INFO - LogisticRegression -> Accuracy: 0.9477, RMSE: 0.2286
+2025-11-24 19:59:43,707 - INFO - ============================================================
+2025-11-24 19:59:43,708 - INFO - PIPELINE EXECUTION COMPLETED SUCCESSFULLY
+2025-11-24 19:59:43,709 - INFO - ============================================================
