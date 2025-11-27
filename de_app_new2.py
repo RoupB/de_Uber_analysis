@@ -42,12 +42,14 @@ numeric_columns = ['Avg VTAT', 'Avg CTAT', 'Booking Value', 'Ride Distance',
 df.replace("null", np.nan, inplace=True)
 
 # Convert to numeric
+st.caption("✔ Convert to numeric")
 for col in numeric_columns:
     df[col] = pd.to_numeric(df[col], errors='coerce')
 
 df[numeric_columns] = df[numeric_columns].fillna(0)
 
 # Merge timestamp
+st.caption("✔ Merge timestamp")
 df["Timestamp"] = pd.to_datetime(df["Date"].astype(str) + " " + df["Time"].astype(str),
                                  errors='coerce')
 
@@ -55,6 +57,7 @@ df["DayOfWeek"] = df["Timestamp"].dt.day_name()
 df["HourOfDay"] = df["Timestamp"].dt.hour.fillna(0).astype(int)
 
 # Clean categorical nulls
+st.caption("✔ Clean categorical nulls")
 cat_defaults = {
     "Reason for cancelling by Customer": "Not cancelled",
     "Driver Cancellation Reason": "Not cancelled",
@@ -67,6 +70,7 @@ for c, v in cat_defaults.items():
         df[c] = df[c].replace("null", v).fillna(v)
 
 # Cancelled flags
+st.caption("✔ Cancelled flags")
 df["is_cancelled"] = np.where(
     (df.get("Cancelled Rides by Customer", 0).astype(float) > 0) |
     (df.get("Cancelled Rides by Driver", 0).astype(float) > 0),
@@ -228,6 +232,8 @@ with col2:
         ax.set_ylabel("Reason")
         plt.xticks(rotation=30)
         st.pyplot(fig)
+
+st.success("✔ EDA done successfully.")
 # -------------------------------------------------------
 # 4️⃣ Vehicle vs Customer Cancellation (FULL WIDTH)
 # -------------------------------------------------------
@@ -314,6 +320,7 @@ csv = out_df.to_csv(index=False).encode()
 
 st.download_button("Download Predictions CSV", csv, "predictions.csv")
 
+st.success("✔ ML completed successfully.")
 # -------------------------------------------------------
 # 🔥 H2O AutoML (Optional Advanced ML Section)
 # -------------------------------------------------------
